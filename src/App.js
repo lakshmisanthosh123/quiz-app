@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import QuizContext  from './context/QuizContext';
+import Quiz from './components/Quiz';
+import Result from './components/Result';
+import QuizSettings from './components/QuizSettings';
 
-function App() {
+const App = () => {
+  const { state } = useContext(QuizContext);
+  const { currentQuestion, questions } = state;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {currentQuestion === 0 && <QuizSettings />}
+      {currentQuestion < questions.length ? <Quiz /> : <Result />}
     </div>
   );
-}
+};
 
 export default App;
